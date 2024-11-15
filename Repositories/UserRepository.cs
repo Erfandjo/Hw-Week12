@@ -18,7 +18,7 @@ namespace Hw_Week12.Repositories
             _appDbContext = new AppDbContext();
         }
 
-        public User GetForUserName(string userName)
+        public User? GetForUserName(string userName)
         {
             return _appDbContext.Users.FirstOrDefault(u => u.UserName == userName);
         }

@@ -26,8 +26,8 @@ namespace Hw_Week12.Repositories
 
         public Result Remove(int id)
         {
-            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id);
-            if(task.UserId == OnlineUser.CurrentUser.Id)
+            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == OnlineUser.CurrentUser.Id);
+            if(task is not null)
             {
                 _appDbContext.Tasks.Remove(task);
                 _appDbContext.SaveChanges();
@@ -44,8 +44,8 @@ namespace Hw_Week12.Repositories
 
         public Result Update(int id, string title, int order, DateTime dateTime)
         {
-            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id);
-            if (task.UserId == OnlineUser.CurrentUser.Id)
+            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == OnlineUser.CurrentUser.Id);
+            if (task is not null)
             {
                 task.Order = order;
                 task.Title = title;
@@ -59,8 +59,8 @@ namespace Hw_Week12.Repositories
 
         public Result UpdateState(int id, int state)
         {
-            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id);
-            if (task.UserId == OnlineUser.CurrentUser.Id)
+            var task = _appDbContext.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == OnlineUser.CurrentUser.Id);
+            if (task is not null)
             {
                 task.State = (Enum.StateEnum)state;
                 _appDbContext.SaveChanges();
